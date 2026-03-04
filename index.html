@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Prjct.jra7.f</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>جرّاح Reality</title>
+
+ 
+
+</head>
+
+<body>
+
+  <div id="splash-screen">
+  <svg viewBox="0 0 200 60" preserveAspectRatio="none" width="200" height="60">
+    <polyline points="0,30 20,30 25,10 30,50 35,30 50,30 70,30 75,15 80,45 85,30 100,30 120,30 125,5 130,55 135,30 150,30 170,30 175,10 180,50 185,30 200,30"
+      stroke="#A31F2A" stroke-width="2" fill="none" class="pulse-line"/>
+  </svg>
+    <div id="app-name">جرّاح Reality</div>
+
+
+</div>
+
+  
+
+  <div id="login-screen" class="screen" style="display:flex; flex-direction: column; justify-content: center; align-items: center;">
+  <div id="app-name-login" style="font-size: 2.5rem; color: var(--accent); font-weight: 700; margin-bottom: 20px;">
+
+    جرّاح Reality
+
+  </div>
+    <div class="login-box">
+
+      <h2 style="color:var(--accent)">تسجيل الدخول</h2>
+
+      <input type="email" id="login-email" class="input-field" placeholder="الايميل (example@gmail.com)">
+
+      <input type="password" class="input-field" placeholder="كلمة المرور">
+
+      <button class="btn-main" onclick="handleLogin()">دخول</button>
+<button class="btn-main" style="background:#2D8886"
+
+onclick="alert('هذه الميزة غير متاحة ولكن سنطمح لها')">
+
+تسجيل الدخول عن طريق نفاذ
+
+</button>
+      <p style="font-size:0.8rem; margin-top:10px; cursor:pointer" onclick="showScreen('register-screen')">ليس لديك حساب؟ سجل الآن</p>
+
+    </div>
+
+  </div>
+
+  <div id="register-screen" class="screen">
+
+    <div class="login-box">
+
+      <h2 style="color:var(--accent)">حساب جديد</h2>
+
+      <input type="text" id="reg-uni" class="input-field" placeholder="اسم الجامعة (إلزامي) *">
+
+      <input type="email" id="reg-email" class="input-field" placeholder="الايميل (@gmail.com) *">
+
+      <button class="btn-main" onclick="handleRegister()">إنشاء حساب</button>
+
+      <button class="btn-main" style="background:#666" onclick="showScreen('login-screen')">رجوع</button>
+
+    </div>
+
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <div id="sidebar">
+
+    <div class="sidebar-item" onclick="goHome()">🏠 القائمة الرئيسية</div>
+
+    <div class="sidebar-item" onclick="showSection('profile-page')">👤 الملف الشخصي</div>
+<div class="sidebar-item" onclick="showSection('surgeon-community')">🤝 مجتمع جراح</div>
+
+<div class="sidebar-item" onclick="showSection('professors-page')">👨‍🏫 تعرف على أساتذة الجامعة</div>
+    
+<div class="sidebar-item" onclick="showSection('bluetooth-page')">🔵 ربط البلوتوث مع الجهاز الخاص بك</div>
+
+<div class="sidebar-item" onclick="showSection('tasks-page')">📅 جدول مهامك</div>
+    <div class="sidebar-item" onclick="showSection('faq-page')">❓ تساؤلات</div>
+
+  </div>
+
+  <div id="main-content" class="container" style="display:none">
+
+    <header>
+ 
+      <div class="menu-trigger" onclick="openSidebar()">☰</div>
+
+      <input class="top-search-bar" placeholder="🔍 بحث...">
+ <div style="cursor:pointer; color:var(--accent); font-weight:600;"
+
+       onclick="toggleProgress()">
+
+    📊 نسبة التقدم
+
+  </div>
+    </header>
+<div id="progress-panel" style="
+
+  display:none;
+
+  background:#fff;
+
+  border-radius:15px;
+
+  padding:15px;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+  max-height:300px;
+
+  overflow-y:auto;
+
+  margin-bottom:15px;
+
+">
+
+  <h3>📊 تقدمك</h3>
+
+  <p>الاختبارات</p>
+
+  <div style="background:#eee; border-radius:10px;">
+
+    <div style="width:70%; background:var(--accent); color:#fff; padding:5px; border-radius:10px;">
+
+      70%
+
+    </div>
+
+  </div>
+
+  <p style="margin-top:10px;">الفيديو والمحاكاة</p>
+
+  <div style="background:#eee; border-radius:10px;">
+
+    <div style="width:45%; background:var(--accent); color:#fff; padding:5px; border-radius:10px;">
+
+      45%
+
+    </div>
+
+  </div>
+
+  <p style="margin-top:10px;">التقنيات والأدوات</p>
+
+  <div style="background:#eee; border-radius:10px;">
+
+    <div style="width:60%; background:var(--accent); color:#fff; padding:5px; border-radius:10px;">
+
+      60%
+
+    </div>
+
+  </div>
+
+</div>
+    <div id="home-view">
+
+      <div class="list-item" style="display:flex; align-items:center; gap:15px;">
+
+        <div style="width:45px; height:45px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold">س</div>
+
+        <div>
+          <h4 style="margin:0">د. سارة محمد</h4><small>سنة الامتياز</small>
+        </div>
+
+      </div>
+
+      <div class="main-icons">
+        <div class="icon-card" onclick="showSection('library-page')"><span>📚</span>
+          <p>المكتبة الجراحية</p>
+        </div>
+
+        <div class="icon-card" onclick="showSection('tools-page')"><span>🛠️</span>
+          <p>التقنيات والأدوات</p>
+        </div>
+
+        <div class="icon-card" onclick="showSection('questions-page')"><span>🧠</span>
+          <p>بنك الأسئلة</p>
+        </div>
+
+        <div class="icon-card" onclick="showSection('videos-page')"><span>🎥</span>
+          <p>الفيديو والمحاكاة</p>
+        </div>
+
+        <div class="icon-card" onclick="showSection('community-page')" style="grid-column: span 2;"><span>🤝</span>
+          <p>مجتمع جراح</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="library-page" class="section-page">
+  <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+  <h2>📚 المكتبة الجراحية</h2>
+
+  <div class="list-item" onclick="toggleLibrary('lib-general')">
+    🔹 جراحة عامة
+    <div id="lib-general" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectLibrary('جراحة عامة','المكتبة الرقمية السعودية')">
+        📘 المكتبة الرقمية السعودية
+      </div>
+      <div class="list-item" onclick="selectLibrary('جراحة عامة','الباحث العلمي Google')">
+        🌐 الباحث العلمي Google
+      </div>
+    </div>
+  </div>
+
+  <div class="list-item" onclick="toggleLibrary('lib-ortho')">
+    🔹 جراحة العظام
+    <div id="lib-ortho" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectLibrary('جراحة العظام','المكتبة الرقمية السعودية')">
+        📘 المكتبة الرقمية السعودية
+      </div>
+      <div class="list-item" onclick="selectLibrary('جراحة العظام','الباحث العلمي Google')">
+        🌐 الباحث العلمي Google
+      </div>
+    </div>
+  </div>
+
+  <div class="list-item" onclick="toggleLibrary('lib-neuro')">
+    🔹 جراحة مخ وأعصاب
+    <div id="lib-neuro" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectLibrary('جراحة مخ وأعصاب','المكتبة الرقمية السعودية')">
+        📘 المكتبة الرقمية السعودية
+      </div>
+      <div class="list-item" onclick="selectLibrary('جراحة مخ وأعصاب','الباحث العلمي Google')">
+        🌐 الباحث العلمي Google
+      </div>
+    </div>
+  </div>
+
+  <div class="list-item" onclick="toggleLibrary('lib-cardio')">
+    🔹 جراحة قلب وصدر
+    <div id="lib-cardio" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectLibrary('جراحة قلب وصدر','المكتبة الرقمية السعودية')">
+        📘 المكتبة الرقمية السعودية
+      </div>
+      <div class="list-item" onclick="selectLibrary('جراحة قلب وصدر','
+                                      الباحث العلمي Google')">
+        🌐 الباحث العلمي Google
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="tools-page" class="section-page">
+
+      <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+      <h2>🛠️ التقنيات والأدوات</h2>
+
+      
+  <div class="list-item" onclick="toggleTools('tools-general')">
+    🔹 الأدوات الجراحية الحديثة
+    <div id="tools-general" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectToolType('الأدوات الجراحية الحديثة','نظري')">
+        📘 نظري
+      </div>
+      <div class="list-item" onclick="selectToolType('الأدوات الجراحية الحديثة','عملي')">
+        🧪 عملي
+      </div>
+    </div>
+  </div>
+
+  <div class="list-item" onclick="toggleTools('tools-suturing')">
+    🔹 تقنيات الخياطة
+    <div id="tools-suturing" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectToolType('تقنيات الخياطة','نظري')">
+        📘 نظري
+      </div>
+      <div class="list-item" onclick="selectToolType('تقنيات الخياطة','عملي')">
+        🧪 عملي
+      </div>
+    </div>
+  </div>
+
+  <div class="list-item" onclick="toggleTools('tools-steps')">
+    🔹 خطوات العمليات
+    <div id="tools-steps" style="display:none; padding-top:10px;">
+      <div class="list-item" onclick="selectToolType('خطوات العمليات','نظري')">
+        📘 نظري
+      </div>
+      <div class="list-item" onclick="selectToolType('خطوات العمليات','عملي')">
+        🧪 عملي
+      </div>
+    </div>
+  </div>
+</div>
+      
+
+    <div id="questions-page" class="section-page">
+
+  <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+  <h2>🧠 بنك الأسئلة</h2>
+<div class="list-item"> 🔹 اختبارات الجراحة العامة</div>
+
+      <div class="list-item">🔹 اختبارات جراحة العظام</div>
+
+      <div class="list-item">🔹 اختبارات جراحة مخ وأعصاب</div>
+
+      <div class="list-item">🔹 اختبارات جراحة قلب وصدر</div>
+
+    </div>
+  
+   
+
+    
+</div>
+
+ 
+
+    <div id="videos-page" class="section-page">
+
+      <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+      <h2>🎥 الفيديو والمحاكاة</h2>
+
+      <div class="list-item" onclick="showSubMenu('sub-360')">🎬 مقطع 360 لعملية جراحية</div>
+
+      <div id="sub-360" style="display:none; padding-right:20px;">
+
+        <a href="https://youtu.be/xjD3wzhmGLs?si=qarwwW7YzvhldTP7" target="_blank" class="list-item">الجراحة العامة</a>
+
+<a href="https://youtu.be/jeBFt57HlZ4?si=byJGwa03rXXZDVB1" target="_blank" class="list-item">جراحة العظام</a>
+
+<a href="https://youtu.be/NCxHinU81e0?si=07S5zJu16hLUaG9h" target="_blank" class="list-item">جراحة مخ وأعصاب</a>
+
+<a href="https://youtu.be/_Ww0Gf89r8w?si=lQ4C33b40hyViWLO" target="_blank" class="list-item">جراحة قلب وصدر</a>
+
+      </div>
+      <div class="list-item" onclick="showSubMenu('sub-videos')">
+
+        🎞️ مقاطع فيديو توضيحية
+
+      </div>
+
+      <div id="sub-videos" style="display:none; padding-right:20px;">
+
+        <a href="https://youtube.com/playlist?list=PLqybb6hOsWJfdZ4cj1hVotB9XZwXcgk9E&si=R2C55ujAVZ7eTmRZ" target="_blank" class="list-item" style="border-right-color:#555">
+
+          جراحة عامة
+
+        </a>
+
+        <a href="https://youtube.com/playlist?list=PLbYQl9-UI2ioClZd9uJ1-mvMnPSXhKhqf&si=JNHljeSCicDY4Oop" target="_blank" class="list-item" style="border-right-color:#555">
+
+          جراحة قلب
+
+        </a>
+
+        <a href="https://youtube.com/playlist?list=PL5rTEahBdxV70kXkIyCkF0VMYnS86lAV2&si=Ci2iLkn_AHRpTGrH" target="_blank" class="list-item" style="border-right-color:#555">
+
+          مخ و أعصاب
+
+        <a href="https://youtube.com/playlist?list=PLLywMQWaFPRRgyMUwJSaEdhMUnbtdpE5P&si=CY0gkAl5wfz9W49l" target="_blank" class="list-item" style="border-right-color:#555">
+
+         جراحة عظام
+
+        </a>
+      </div>
+      <a href="https://surgeon-simulator.ar.uptodown.com/android" target="_blank" class="list-item">🎮 تدريب تفاعلي JR</a>
+
+    </div>
+
+    <div id="community-page" class="section-page">
+
+      <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+      <h2>🤝 مجتمع جراح</h2>
+
+      <div class="list-item" onclick="openChat('students')">💬 مناقشة بين الطلاب</div>
+
+      <div class="list-item" onclick="openChat('experience')">💡 تبادل الخبرات</div>
+
+      <div class="list-item" onclick="openChat('summaries')">📄 مشاركة الملخصات</div>
+
+      <div class="list-item" onclick="openChat('ai')" style="background:#fdf2f2">🤖 أسأل الذكاء الاصطناعي</div>
+
+    </div>
+
+    <div id="chat-screen" class="section-page">
+
+      <button class="back-btn" onclick="showSection('community-page')">⬅️ رجوع للجروبات</button>
+
+      <h3 id="chat-title">الجروب</h3>
+
+      <div class="chat-container">
+
+        <div class="chat-header" id="chat-participants">المشاركون: د. تالة، د. نيرفانا، د. جودي...</div>
+
+        <div class="chat-messages" id="chat-messages"></div>
+
+        <div class="chat-input-area">
+
+          <input type="file" id="file-input" style="display:none" onchange="sendFile()">
+
+          <button onclick="document.getElementById('file-input').click()" id="attach-btn" style="border:none; background:none; font-size:1.2rem; cursor:pointer">📎</button>
+
+          <input type="text" id="chat-msg-input" placeholder="اكتب رسالتك...">
+
+          <button class="back-btn" style="margin:0; background:var(--accent); color:#fff" onclick="sendChatMessage()">إرسال</button>
+
+        </div>
+
+      </div>
+
+    </div>
+<div id="professors-page" class="section-page">
+
+  <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+  <div class="list-item">
+
+    د. أحمد محمد – جراحة عامة<br>
+
+    المادة: أساسيات الجراحة
+
+  </div>
+
+  <div class="list-item">
+
+    د. لينا مروان – جراحة عظام<br>
+
+    المادة: إصابات العظام
+
+  </div>
+
+</div>
+    <div id="profile-page" class="section-page">
+
+      <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+
+  <h2>👤 د. سارة محمد</h2>
+
+  <div class="profile-container">
+
+    <div class="profile-item">
+      <span>🏫 الجامعة</span>
+      <span>جامعة أم القرى</span>
+    </div>
+
+    <div class="profile-item">
+      <span>🔢 الرقم الجامعي</span>
+      <span>445001234</span>
+    </div>
+
+    <div class="profile-item">
+      <span>📧 البريد الجامعي</span>
+      <span>s445001234@uqu.edu.sa</span>
+    </div>
+
+    <div class="profile-item">
+      <span>⏳ الساعات المنجزة</span>
+      <span>120</span>
+    </div>
+
+  <div id="language-card" class="profile-item profile-click">
+      <span>🌍 اللغة</span>
+      <span>العربية ›</span>
+    </div>
+
+  </div>
+
+      </div>
+<div id="surgeon-community" class="section-page">
+
+  <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+  <div class="list-item" onclick="createCommunity()">➕ إنشاء مجتمع</div>
+
+  <div class="list-item" onclick="joinCommunity()">🔑 ادخل رمز المجتمع</div>
+
+  <div class="list-item" onclick="showSection('my-communities')">👥 مجتمعاتك</div>
+
+</div>
+
+<div id="tasks-page" class="section-page">
+
+  <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+  <h2>🗓️ جدول مهامك</h2>
+
+  
+
+  <div class="list-item">
+
+  📅 اختر اليوم لإضافة مهمة
+
+  <br><br>
+
+  <input type="date" class="input-field">
+
+</div>
+
+<div class="list-item">
+
+  📝 اكتب مهمتك
+
+  <br><br>
+
+  <input type="text" class="input-field" placeholder="اكتب المهمة هنا">
+
+</div>
+
+<div class="list-item">
+
+  <button class="btn-main" >
+
+    حفظ المهمة
+
+  </button>
+
+</div>
+
+  <button class="btn-main" >إضافة مهمة جديدة</button>
+
+</div>
+
+<div id="my-communities" class="section-page">
+
+  <button class="back-btn" onclick="showSection('surgeon-community')">⬅️ رجوع</button>
+
+  <div class="list-item">
+
+    <b>مجتمع التخييط الجراحي</b><br>
+
+    د. مرام: لا تنسوا مراجعة تقنية تخييط الجراح
+
+    <br><br>
+    <button class="back-btn" onclick="alert('تم الخروج من المجتمع')">الخروج من المجتمع</button>
+       </div>
+
+  
+<div class="list-item" onclick="toggleCommunity('com1')">
+
+  <b>مجتمع جراحة العظام</b><br>
+  د. رغد: سيبدأ التقييم النهائي العملي الأسبوع القادم
+  <br><br>
+<button class="back-btn" onclick="alert('تم الخروج من المجتمع')">الخروج من المجتمع</button>
+</div>
+
+<div id="com1" style="display:none; padding-right:10px;">
+
+  <div class="list-item" onclick="openChat('students')">
+
+    💬 دردشة المجتمع
+
+  </div>
+
+  <div class="list-item">
+
+    🏆 لائحة الصدارة
+
+    <br>
+
+    1- أحمد 95<br>
+
+    2- سارة 93<br>
+
+    3- علي 90<br>
+
+    4- ريم 89<br>
+
+    5- خالد 88<br>
+
+    6- نور 85<br>
+
+    7- لمى 84<br>
+
+    8- هدى 82<br>
+
+    9- جود 80<br>
+
+    10- ندى 78
+
+  </div>
+
+  <div class="list-item">
+
+    📂 مشاركة الملفات
+</div>
+ 
+
+  
+  
+
+</div>
+  
+</div>
+      
+  </div>
+      
+ 
+<div id="bluetooth-page" class="section-page">
+
+  <button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+
+  <h2>🔗 ربط البلوتوث</h2>
+
+  <div class="list-item">
+    🔐 أدخل رمز جهاز البلوتوث
+    <br><br>
+    <input type="text" placeholder="ادخل رمز الجهاز" class="input-field">
+  </div>
+
+  <div class="list-item">
+    <button class="btn-main" onclick="alert('تم إرسال الرمز للجهاز!')">
+      ربط الجهاز
+    </button>
+  </div>
+
+  <div class="list-item" onclick="toggleBluetoothInfo()">
+    🔎 ماذا سيحدث عند الربط؟
+  </div>
+
+  <div id="bluetooth-info" style="display:none; padding-right:10px;">
+
+    <a href="https://youtu.be/7C7zAXf2EI0?si=Syw3sOAHZOOTzHNA" target="_blank" class="list-item">
+      🎬 مقدمة توضيحية
+    </a>
+
+    <a href="https://youtu.be/LcD1VgOljLg?si=8CIWO9vtwgnbTNSy" target="_blank" class="list-item">
+      👓 شاهد كيف ستكون تجربتك
+    </a>
+
+    <a href="https://youtu.be/3tpnRFshvsA?si=HCxF1Jkz_vfZ03KD" target="_blank" class="list-item">
+      🎥 شاهد منظورك
+    </a>
+
+  </div>
+
+</div>
+    <div id="faq-page" class="section-page"><button class="back-btn" onclick="goHome()">⬅️ رجوع</button>
+      <h2>❓ تساؤلات</h2>
+      <div class="list-item">
+
+  إطرح سؤال<br>
+
+  <small>إسألنا عن فضولك حتى نتجاوب قريباً</small>
+
+</div>
+      <div id="faq-list"></div>
+    </div>
+
+    <footer>
+
+      <p>صنع بأيادي سعودية 🇸🇦</p>
+
+      <p>بواسطة طبيبات المستقبل:<br>
+
+        د.تالة غزاوي | د.نيرڤانا الكردي | د.جودي رومي<br>
+
+        د.جنى الرشيدي | د.مروه الحاتمي | د.حلا بنجر</p>
+<p> 📞 الدعم الفني </p>
+      <p>0541166449</p>
+    </footer>
+
+  </div>
+
+ 
+
+</body>
+
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
